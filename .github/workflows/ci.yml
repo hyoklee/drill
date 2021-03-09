@@ -56,7 +56,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
       - name: Build and test
-        run: mvn install
+        run: mvn install -DskipTests
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
