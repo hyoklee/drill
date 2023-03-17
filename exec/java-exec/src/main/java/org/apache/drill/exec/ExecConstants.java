@@ -191,6 +191,11 @@ public final class ExecConstants {
   public static final BooleanValidator HASHAGG_FALLBACK_ENABLED_VALIDATOR = new BooleanValidator(HASHAGG_FALLBACK_ENABLED_KEY,
       new OptionDescription("Hash Aggregates ignore memory limits when enabled (true). When disabled (false), Hash Aggregates fail when memory is set too low."));
 
+  public static final String IMPLICIT_CAST_FOR_JOINS_ENABLED = "drill.exec.implicit_casts.joins.enabled";
+  public static final BooleanValidator IMPLICIT_CAST_FOR_JOINS_ENABLED_VALIDATOR = new BooleanValidator(IMPLICIT_CAST_FOR_JOINS_ENABLED,
+      new OptionDescription("When true, this option enables implicit casts for joins.  This is an experimental feature in Drill 1.21.1"));
+
+
   // Partitioner options
   public static final String PARTITIONER_MEMORY_REDUCTION_THRESHOLD_KEY = "exec.partition.mem_throttle";
   public static final LongValidator PARTITIONER_MEMORY_REDUCTION_THRESHOLD_VALIDATOR =
@@ -600,6 +605,10 @@ public final class ExecConstants {
   public static final BooleanValidator ENABLE_UNION_TYPE = new BooleanValidator(ENABLE_UNION_TYPE_KEY,
       new OptionDescription("Enable support for Avro union type."));
 
+  public static final String EXCEPT_ADD_AGG_BELOW_KEY = "exec.except_add_agg_below";
+  public static final BooleanValidator EXCEPT_ADD_AGG_BELOW = new BooleanValidator(EXCEPT_ADD_AGG_BELOW_KEY,
+    new OptionDescription("Add agg below setop for left input when doing except, otherwise above setop"));
+
   // Kafka plugin related options.
   public static final String KAFKA_ALL_TEXT_MODE = "store.kafka.all_text_mode";
   public static final OptionValidator KAFKA_READER_ALL_TEXT_MODE_VALIDATOR = new BooleanValidator(KAFKA_ALL_TEXT_MODE,
@@ -707,6 +716,18 @@ public final class ExecConstants {
   public static final String LATE_LIMIT0_OPT_KEY = "planner.enable_limit0_on_scan";
   public static final BooleanValidator LATE_LIMIT0_OPT = new BooleanValidator(LATE_LIMIT0_OPT_KEY,
       new OptionDescription("Enables Drill to determine data types as Drill scans data. This optimization is used when the query planner cannot infer types of columns during validation (prior to scanning). Drill exits and terminates the query immediately after resolving the types. When this optimization is applied, the query plan contains a LIMIT (0) above every SCAN, with an optional PROJECT in between. Default is true. (Drill 1.14+)"));
+
+  // Intended only for the internal use in QUERY scope of flagging the presence
+  // of a LIMIT 0 in the root portion of a query for an early stage (query
+  // validation) optimisation that exits early from the recursive listing of
+  // files matching the paths present in the query's FROM clauses. The option
+  // exec.query.max_rows can unfortunately not be reused here because a value
+  // of 0 means "no maximum" for it.
+  public static final String FILE_LISTING_LIMIT0_OPT_KEY = "planner.enable_file_listing_limit0_optimization";
+  public static final BooleanValidator FILE_LISTING_LIMIT0_OPT = new BooleanValidator(
+      FILE_LISTING_LIMIT0_OPT_KEY,
+      new OptionDescription("For internal use. Do not change.")
+  );
 
   public static final String ENABLE_MEMORY_ESTIMATION_KEY = "planner.memory.enable_memory_estimation";
   public static final OptionValidator ENABLE_MEMORY_ESTIMATION = new BooleanValidator(ENABLE_MEMORY_ESTIMATION_KEY,

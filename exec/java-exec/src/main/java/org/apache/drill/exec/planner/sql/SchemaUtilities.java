@@ -34,8 +34,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SchemaUtilites {
-  private static final Logger logger = LoggerFactory.getLogger(SchemaUtilites.class);
+public class SchemaUtilities {
+  private static final Logger logger = LoggerFactory.getLogger(SchemaUtilities.class);
   public static final Joiner SCHEMA_PATH_JOINER = Joiner.on(".").skipNulls();
 
   /**
@@ -96,6 +96,7 @@ public class SchemaUtilites {
   /** Utility method to search for schema path starting from the given <i>schema</i> reference */
   public static SchemaPlus searchSchemaTree(SchemaPlus schema, final List<String> schemaPath) {
     for (String schemaName : schemaPath) {
+
       // schemas in Drill are case insensitive and stored in lower case
       schema = schema.getSubSchema(schemaName.toLowerCase());
       if (schema == null) {
@@ -313,9 +314,9 @@ public class SchemaUtilites {
    */
   public static AbstractSchema resolveToTemporarySchema(List<String> tableSchema, SchemaPlus defaultSchema, DrillConfig config) {
     if (tableSchema.size() == 0) {
-      return SchemaUtilites.getTemporaryWorkspace(defaultSchema, config);
+      return SchemaUtilities.getTemporaryWorkspace(defaultSchema, config);
     } else {
-      return SchemaUtilites.resolveToMutableDrillSchema(defaultSchema, tableSchema);
+      return SchemaUtilities.resolveToMutableDrillSchema(defaultSchema, tableSchema);
     }
   }
 

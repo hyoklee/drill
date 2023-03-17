@@ -18,20 +18,19 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
-    <version>24</version>
-    <relativePath/>
+    <version>29</version>
+    <relativePath />
   </parent>
 
   <groupId>org.apache.drill</groupId>
   <artifactId>drill-root</artifactId>
-  <version>1.21.0-SNAPSHOT</version>
+  <version>1.22.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Drill :</name>
@@ -42,37 +41,37 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <sourceReleaseAssemblyDescriptor>source-release-zip-tar</sourceReleaseAssemblyDescriptor>
-    <project.build.outputTimestamp>10</project.build.outputTimestamp>
+    <project.build.outputTimestamp>1676438963</project.build.outputTimestamp>
     <target.gen.source.path>${project.basedir}/target/generated-sources</target.gen.source.path>
     <proto.cas.path>${project.basedir}/src/main/protobuf/</proto.cas.path>
     <junit.version>5.7.2</junit.version>
     <junit4.version>4.13.2</junit4.version>
     <junit.platform.version>1.8.2</junit.platform.version>
-    <slf4j.version>1.7.26</slf4j.version>
+    <slf4j.version>2.0.6</slf4j.version>
     <shaded.guava.version>28.2-jre</shaded.guava.version>
     <guava.version>30.1.1-jre</guava.version>
     <forkCount>1</forkCount>
     <parquet.version>1.12.2</parquet.version>
     <parquet.format.version>2.8.0</parquet.format.version>
     <calcite.groupId>org.apache.calcite</calcite.groupId>
-    <calcite.version>1.32.0</calcite.version>
-    <avatica.version>1.22.0</avatica.version>
+    <calcite.version>1.34.0</calcite.version>
+    <avatica.version>1.23.0</avatica.version>
     <janino.version>3.1.8</janino.version>
     <sqlline.version>1.12.0</sqlline.version>
-    <jackson.version>2.13.4.20221013</jackson.version>
+    <jackson.version>2.14.1</jackson.version>
     <zookeeper.version>3.5.7</zookeeper.version>
     <mapr.release.version>6.1.0-mapr</mapr.release.version>
     <ojai.version>3.0-mapr-1808</ojai.version>
     <kerby.version>1.0.0</kerby.version>
     <findbugs.version>3.0.0</findbugs.version>
-    <netty.tcnative.classifier/>
+    <netty.tcnative.classifier />
     <commons.io.version>2.7</commons.io.version>
     <commons.collections.version>4.4</commons.collections.version>
     <hamcrest.version>2.2</hamcrest.version>
     <curator.version>5.2.0</curator.version>
     <wiremock.standalone.version>2.23.2</wiremock.standalone.version>
     <jmockit.version>1.47</jmockit.version>
-    <logback.version>1.2.11</logback.version>
+    <logback.version>1.3.5</logback.version>
     <mockito.version>3.11.2</mockito.version>
     <!--
       Currently, Hive storage plugin only supports Apache Hive 3.1.3 or vendor specific variants of the
@@ -87,13 +86,13 @@
     <javassist.version>3.28.0-GA</javassist.version>
     <msgpack.version>0.6.6</msgpack.version>
     <reflections.version>0.9.10</reflections.version>
-    <avro.version>1.11.0</avro.version>
+    <avro.version>1.11.1</avro.version>
     <metrics.version>4.2.10</metrics.version>
     <jetty.version>9.4.44.v20210927</jetty.version>
     <jersey.version>2.34</jersey.version>
     <javax.validation.api>2.0.1.Final</javax.validation.api>
     <asm.version>9.2</asm.version>
-    <excludedGroups/>
+    <excludedGroups />
     <memoryMb>2500</memoryMb>
     <directMemoryMb>4500</directMemoryMb>
     <rat.skip>true</rat.skip>
@@ -110,7 +109,7 @@
     <codemodel.version>2.6</codemodel.version>
     <joda.version>2.10.14</joda.version>
     <javax.el.version>3.0.0</javax.el.version>
-    <surefire.version>3.0.0-M7</surefire.version>
+    <surefire.version>3.0.0-M8</surefire.version>
     <jna.version>5.8.0</jna.version>
     <commons.compress.version>1.21</commons.compress.version>
     <hikari.version>4.0.3</hikari.version>
@@ -119,7 +118,7 @@
     <libthrift.version>0.14.0</libthrift.version>
     <derby.version>10.14.2.0</derby.version>
     <commons.cli.version>1.4</commons.cli.version>
-    <snakeyaml.version>1.33</snakeyaml.version>
+    <snakeyaml.version>2.0</snakeyaml.version>
     <commons.lang3.version>3.10</commons.lang3.version>
     <testcontainers.version>1.17.3</testcontainers.version>
     <typesafe.config.version>1.4.2</typesafe.config.version>
@@ -129,13 +128,13 @@
     <commons.beanutils.version>1.9.4</commons.beanutils.version>
     <httpdlog-parser.version>5.8</httpdlog-parser.version>
     <yauaa.version>7.9.0</yauaa.version>
-    <log4j.version>2.18.0</log4j.version>
+    <log4j.version>2.19.0</log4j.version>
     <aircompressor.version>0.20</aircompressor.version>
     <iceberg.version>0.12.1</iceberg.version>
     <univocity-parsers.version>2.8.3</univocity-parsers.version>
     <mongo.version>4.3.3</mongo.version>
     <swagger.version>2.1.12</swagger.version>
-    <junit.args/>
+    <junit.args />
   </properties>
 
   <scm>
@@ -481,9 +480,9 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <dependencies>
           <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.29</version>
+            <groupId>com.github.rnveach</groupId>
+            <artifactId>checkstyle-backport-jre8</artifactId>
+            <version>checkstyle-backport-10.7.0</version>
           </dependency>
         </dependencies>
         <configuration>
@@ -529,7 +528,6 @@
             </manifest>
             <manifestEntries>
               <Extension-Name>org.apache.drill</Extension-Name>
-              <Built-By>${user.name}</Built-By>
               <url>https://drill.apache.org/</url>
             </manifestEntries>
           </archive>
@@ -548,7 +546,7 @@
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.5</version>
         <executions>
           <execution>
             <id>for-source-tarball</id>
@@ -564,6 +562,7 @@
 
         <configuration>
           <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+          <dateFormatTimeZone>UTC</dateFormatTimeZone>
           <verbose>false</verbose>
           <skipPoms>false</skipPoms>
           <generateGitPropertiesFile>true</generateGitPropertiesFile>
@@ -959,7 +958,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -972,7 +971,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -985,7 +984,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1000,7 +999,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1013,7 +1012,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -1064,13 +1063,15 @@
             <doclint>none</doclint>
           </configuration>
         </plugin>
-
-        <!--Note: apache-21.pom has the latest versions of apache-rat-plugin, maven-dependency-plugin and
-        maven-clean-plugin. Once the newer versions are needed and present in maven repo, the plugins versions can be
-        overridden here-->
       </plugins>
     </pluginManagement>
   </build>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </pluginRepository>
+  </pluginRepositories>
   <dependencies>
 
     <dependency>
@@ -1202,13 +1203,8 @@
     <dependency>
       <groupId>de.huxhorn.lilith</groupId>
       <artifactId>de.huxhorn.lilith.logback.appender.multiplex-classic</artifactId>
-      <version>0.9.44</version>
+      <version>8.3.0</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xerial.snappy</groupId>
-      <artifactId>snappy-java</artifactId>
-      <version>1.1.2.6</version>
     </dependency>
     <dependency>
       <groupId>org.apache.kerby</groupId>
@@ -1302,13 +1298,9 @@
       </dependency>
       <dependency>
         <groupId>org.apache.calcite.avatica</groupId>
-        <artifactId>avatica</artifactId>
+        <artifactId>avatica-core</artifactId>
         <version>${avatica.version}</version>
         <exclusions>
-          <exclusion>
-            <groupId>org.apache.calcite.avatica</groupId>
-            <artifactId>avatica-core</artifactId>
-          </exclusion>
           <exclusion>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -3893,10 +3885,10 @@
       <properties>
         <maven.compiler.release>8</maven.compiler.release>
         <junit.args>
-          --add-opens=java.base/java.lang=ALL-UNNAMED
+          --add-opens java.base/java.lang=ALL-UNNAMED
           --add-opens java.base/java.net=ALL-UNNAMED
           --add-opens java.base/java.nio=ALL-UNNAMED
-          --add-opens=java.base/java.util=ALL-UNNAMED
+          --add-opens java.base/java.util=ALL-UNNAMED
           --add-opens java.base/sun.nio.ch=ALL-UNNAMED
           --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED
         </junit.args>

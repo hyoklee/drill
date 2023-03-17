@@ -23,7 +23,7 @@
   <parent>
     <artifactId>drill-contrib-parent</artifactId>
     <groupId>org.apache.drill.contrib</groupId>
-    <version>1.21.0-SNAPSHOT</version>
+    <version>1.22.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>drill-storage-elasticsearch</artifactId>
@@ -67,10 +67,28 @@
     </dependency>
     <dependency>
       <groupId>org.elasticsearch.client</groupId>
-      <artifactId>elasticsearch-rest-high-level-client</artifactId>
-      <version>7.17.5</version>
+      <artifactId>elasticsearch-rest-client</artifactId>
+      <version>8.6.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>co.elastic.clients</groupId>
+      <artifactId>elasticsearch-java</artifactId>
+      <version>8.6.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+      <version>1.42.3</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>net.hydromatic</groupId>
       <artifactId>foodmart-data-json</artifactId>

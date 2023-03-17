@@ -28,7 +28,8 @@ import org.apache.drill.common.expression.PathSegment;
 import org.apache.drill.common.expression.SchemaPath;
 import org.apache.drill.exec.ExecConstants;
 import org.apache.drill.exec.alias.AliasRegistryProvider;
-import org.apache.drill.exec.planner.sql.SchemaUtilites;
+import org.apache.drill.exec.planner.sql.SchemaUtilities;
+import org.apache.drill.exec.proto.UserBitShared.DrillPBError;
 import org.apache.drill.exec.store.AbstractSchema;
 import org.apache.drill.exec.store.SchemaConfig;
 import org.apache.drill.exec.store.StoragePlugin;
@@ -157,7 +158,7 @@ public class DynamicRootSchema extends DynamicSchema {
       }
 
       // Could not find the plugin of schemaName. The schemaName could be `dfs.tmp`, a 2nd level schema under 'dfs'
-      List<String> paths = SchemaUtilites.getSchemaPathAsList(schemaName);
+      List<String> paths = SchemaUtilities.getSchemaPathAsList(schemaName);
       if (paths.size() == 2) {
         plugin = storages.getPlugin(paths.get(0));
         if (plugin == null) {
@@ -191,12 +192,22 @@ public class DynamicRootSchema extends DynamicSchema {
     } catch (Exception ex) {
       logger.error("Failed to load schema for {}", schemaName, ex);
       // We can't proceed further without a schema, throw a runtime exception.
-      UserException.Builder exceptBuilder =
-          UserException
-              .pluginError(ex)
-              .message("Failed to load schema for schema %s", schemaName)
-              .addContext("%s: %s", ex.getClass().getName(), ex.getMessage())
-              .addContext(UserExceptionUtils.getUserHint(ex)); //Provide hint if it exists
+      // The UserException thrown from here must have an error type of PLUGIN
+      // because that will be used to decide whether planning should be retried
+      // by {@link DrillSqlWorker}.
+      //
+      // If the exception we've caught is already a UserException we have to
+      // jump through a hoop to ensure that the one that we throw from
+      // here has an error type of PLUGIN instead of inheriting that of the
+      // caught UserException. See the logic in the UserException builder
+      // methods.
+      UserException.Builder exceptBuilder = ex instanceof UserException
+        ? ((UserException) ex).rebuild().errorType(DrillPBError.ErrorType.PLUGIN)
+        : UserException
+            .pluginError(ex)
+            .message("Failed to load schema for schema %s", schemaName)
+            .addContext("%s: %s", ex.getClass().getName(), ex.getMessage())
+            .addContext(UserExceptionUtils.getUserHint(ex)); //Provide hint if it exists
 
       if (schemaConfig.getOption(ExecConstants.STORAGE_PLUGIN_AUTO_DISABLE).bool_val) {
         String msg = String.format(

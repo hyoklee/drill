@@ -21,10 +21,10 @@ import java.util.List;
 
 import org.apache.calcite.linq4j.Ord;
 
+import org.apache.calcite.rel.core.Union;
 import org.apache.calcite.rel.metadata.RelMetadataQuery;
 import org.apache.drill.common.logical.data.LogicalOperator;
-import org.apache.drill.common.logical.data.Union;
-import org.apache.drill.exec.planner.common.DrillUnionRelBase;
+import org.apache.drill.exec.planner.common.DrillSetOpRel;
 import org.apache.drill.exec.planner.torel.ConversionContext;
 import org.apache.calcite.rel.InvalidRelException;
 import org.apache.calcite.rel.RelNode;
@@ -36,11 +36,14 @@ import org.apache.calcite.plan.RelTraitSet;
 /**
  * Union implemented in Drill.
  */
-public class DrillUnionRel extends DrillUnionRelBase implements DrillRel {
+public class DrillUnionRel extends Union implements DrillRel, DrillSetOpRel {
   /** Creates a DrillUnionRel. */
   public DrillUnionRel(RelOptCluster cluster, RelTraitSet traits,
       List<RelNode> inputs, boolean all, boolean checkCompatibility) throws InvalidRelException {
-    super(cluster, traits, inputs, all, checkCompatibility);
+    super(cluster, traits, inputs, all);
+    if (checkCompatibility && !this.isCompatible(getRowType(), getInputs())) {
+      throw new InvalidRelException("Input row types of the Union are not compatible.");
+    }
   }
 
   @Override
@@ -62,7 +65,7 @@ public class DrillUnionRel extends DrillUnionRelBase implements DrillRel {
 
   @Override
   public LogicalOperator implement(DrillImplementor implementor) {
-    Union.Builder builder = Union.builder();
+    org.apache.drill.common.logical.data.Union.Builder builder = org.apache.drill.common.logical.data.Union.builder();
     for (Ord<RelNode> input : Ord.zip(inputs)) {
       builder.addInput(implementor.visitChild(this, input.i, input.e));
     }
@@ -70,7 +73,11 @@ public class DrillUnionRel extends DrillUnionRelBase implements DrillRel {
     return builder.build();
   }
 
-  public static DrillUnionRel convert(Union union, ConversionContext context) throws InvalidRelException{
+  public static DrillUnionRel convert(org.apache.drill.common.logical.data.Union union, ConversionContext context) throws InvalidRelException{
     throw new UnsupportedOperationException();
+  }
+
+  public boolean isDistinct() {
+    return !this.all;
   }
 }
